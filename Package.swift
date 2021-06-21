@@ -54,7 +54,13 @@ let package = Package(
   ] as [[Product]]).flatMap { $0 },
   targets: ([
     [
-      .target(name: "RxSwift", dependencies: []),
+        .target(
+            name: "RxSwift",
+            dependencies: [],
+            cSettings: [.define("TRACE_RESOURCES", .when(configuration: .debug))],
+            cxxSettings: [.define("TRACE_RESOURCES", .when(configuration: .debug))],
+            swiftSettings: [.define("TRACE_RESOURCES", .when(configuration: .debug))]
+        ),
     ], 
     Target.rxCocoa(),
     Target.rxCocoaRuntime(),
